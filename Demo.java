@@ -1,39 +1,66 @@
-abstract class Car{
-    // here we a declaring the method
-    public abstract void drive();
+// inner class: a class is defined inside another class.
+// types of inner class:
 
-    public abstract void fly();
-
-    public void palyMusic(){
-        System.out.println("play music");
-    }
-}
-
-// Important notes:
-
-// we can't create a object of abstract class.
-// abstract class may or may not contain abstract method.
-// but if you have define abstract method in abstract class then you must have to implement in derived class.
+// 1. member inner class
+// 2. static nested class
+// 3. local inner class
+// 4. anonymous inner class
 
 
-class WagonR extends Car{
-    public void drive(){
-        System.out.println("driving the wagonr");
-    }
+// 1: member inner class:
+class Outer{
+    private String msg = "hello from outer";
 
-    public void fly(){
-        System.out.println("flying");
+    class Inner{
+        void display(){
+            System.out.println("displaying msg of outer class from inner class: " + msg);
+        }
     }
 }
 
 
-public class Demo {
+// 2: static nested class
+class A{
+    static String msg = "Hello from static outer class";
 
+    static class Nested {
+        void display(){
+            System.out.println(msg);
+        }
+    }
+}
+
+
+// 3. Local inner class => defined inside a method, constructor or block, scope is limited onto that block
+
+class B{
+    void bMethod(){
+        class Nested{
+            void display(){
+                System.out.println("inner class defined inside the mentod of outer class");
+            }
+        }
+
+        Nested nes = new Nested();
+        nes.display();
+    }
+}
+
+
+
+
+public class Demo{
     public static void main(String[] args){
-        WagonR obj = new WagonR();
-        obj.drive();
-        obj.palyMusic();
-        obj.fly();
+        Outer out = new Outer();
+        Outer.Inner inn = out.new Inner();
+        inn.display();
 
+
+        A.Nested nes = new A.Nested(); // here no outer object is needed due to static keyword.
+        nes.display();
+
+
+        B b = new B();
+        b.bMethod();
     }
 }
