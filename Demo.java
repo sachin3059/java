@@ -41,11 +41,15 @@ public class Demo {
     public static void main(String[] args){
         // we are creating the object of anonymous inner class.
 
-        B obj = new B();
+        A obj = new B();
         obj.show();
         obj.config();
 
         System.out.println(A.age); // we can acces the variable of interface without creating any object .
+
+
+        X obj1 = new B();
+        obj1.run();
     }
 }
 
