@@ -2,23 +2,25 @@ import java.util.*;
 
 public class Demo{
     public static void main(String[] args){
-        ArrayList<Integer> arr = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
+        Set<String> set = new HashSet<>();
 
-        for(int i = 0; i < 10; i++){
-            int x = sc.nextInt();
-            arr.add(x);
-        }
+        // Adding
+        set.add("Apple");
+        set.add("Banana");
+        set.add("Mango");
+        set.add("Apple"); // Duplicate → ignored
 
-        for(int it: arr){
-            System.out.print(it + " ");
-        }
-        System.out.println();
+        System.out.println(set); // [Banana, Apple, Mango] (unordered)
 
-        // update array element
-        arr.set(2, 334);
-        for(int it: arr){
-            System.out.print(it + " ");
+        // Checking
+        System.out.println(set.contains("Apple")); // true
+
+        // Removing
+        set.remove("Banana");
+
+        // Iterating
+        for (String fruit : set) {
+            System.out.println(fruit);
         }
 
     }
