@@ -1,28 +1,25 @@
-class A extends Thread{
-    public void run(){
-        for(int i = 1; i <= 100; i++){
-            System.out.println("hi");
-        }
-    }
-}
+import java.util.*;
 
-class B extends Thread{
-    public void run(){
-        for(int i = 1; i <= 100; i++){
-            System.out.println("hello");
-        }
-    }
-}
-
-class Demo{
+public class Demo{
     public static void main(String[] args){
-        A obj1 = new A();
-        B obj2 = new B();
+        ArrayList<Integer> arr = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
 
-        obj1.start();
-        obj2.start();
+        for(int i = 0; i < 10; i++){
+            int x = sc.nextInt();
+            arr.add(x);
+        }
+
+        for(int it: arr){
+            System.out.print(it + " ");
+        }
+        System.out.println();
+
+        // update array element
+        arr.set(2, 334);
+        for(int it: arr){
+            System.out.print(it + " ");
+        }
 
     }
 }
-
-// threads in java
