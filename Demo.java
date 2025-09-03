@@ -2,26 +2,25 @@ import java.util.*;
 
 public class Demo{
     public static void main(String[] args){
-        Set<String> set = new HashSet<>();
+        Map<Integer, String> map = new HashMap<>();
 
-        // Adding
-        set.add("Apple");
-        set.add("Banana");
-        set.add("Mango");
-        set.add("Apple"); // Duplicate → ignored
+        // Adding key-value pairs
+        map.put(1, "Alice");
+        map.put(2, "Bob");
+        map.put(3, "Charlie");
+        map.put(2, "Bobby"); // key already exists → value updated
 
-        System.out.println(set); // [Banana, Apple, Mango] (unordered)
-
-        // Checking
-        System.out.println(set.contains("Apple")); // true
+        // Accessing
+        System.out.println(map.get(2)); // Bobby
+        System.out.println(map.containsKey(3)); // true
+        System.out.println(map.containsValue("Charlie")); // true
 
         // Removing
-        set.remove("Banana");
+        map.remove(1);
 
         // Iterating
-        for (String fruit : set) {
-            System.out.println(fruit);
+        for (Map.Entry<Integer, String> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " → " + entry.getValue());
         }
-
     }
 }
