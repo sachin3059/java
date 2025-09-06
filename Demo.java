@@ -13,5 +13,16 @@ public class Demo{
     
         System.out.println(sum);
 
+        // when to use parallelStream:
+        // large dataset
+        // independent operations
+        // cpu-intensive tasks(not i/o tasks)
+
+
+
+        // notes:
+        // stream => one waiter serving dishes one by one
+        // parallel stream => many waiters serving different tables at once
+
     }
 }
