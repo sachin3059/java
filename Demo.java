@@ -5,18 +5,13 @@ public class Demo{
     public static void main(String[] args){
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
-        int sumOfSquares = numbers.stream()
-                            .filter(n -> n%2 == 0)
-                            .map(n -> n * n)
-                            .reduce(0, Integer :: sum);
+        // parallelStream => multi- threaded stream processing
 
-        System.out.println(sumOfSquares);
-
-
-        // notes: 
-        
-        // stream is basically an interface
-        // you can't use stream again
+        int sum = numbers.parallelStream()
+                                        .mapToInt(Integer::intValue)
+                                        .sum();
+    
+        System.out.println(sum);
 
     }
 }
