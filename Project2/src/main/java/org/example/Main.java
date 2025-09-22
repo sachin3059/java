@@ -3,7 +3,8 @@ package org.example;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
+
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -22,9 +23,8 @@ public class Main {
 
         String url = "jdbc:postgresql://localhost:5432/demo";
         String user = "postgres";
-        String password = "0000";
+        String password = "PostG23";
 
-        String query = "SELECT sname FROM student where sid = 1";
 
 
         try{
@@ -33,19 +33,23 @@ public class Main {
             System.out.println("Connected to PostgresSQL database!");
 
             // 2. Create a statement
-            Statement stmt = conn.createStatement();
+            String sql = "SELECT * FROM student WHERE sid = ? ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1,1);
 
-            // 3. Execute query(example: fetch version)
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = ps.executeQuery();
 
-            // 4. Process result
-            if(rs.next()){
-                System.out.println("student name: " + rs.getString(1));
+            while(rs.next()){
+                int id = rs.getInt("sid");
+                String name = rs.getString("sname");
+                int age = rs.getInt("age");
+
+                System.out.println(id + " | " + name + "  | " +  age);
             }
 
             // 5. close Connection
             rs.close();
-            stmt.close();
+            ps.close();
             conn.close();
         }
         catch (Exception e){
