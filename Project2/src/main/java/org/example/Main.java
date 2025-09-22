@@ -1,59 +1,34 @@
 package org.example;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.PreparedStatement;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        /*
-        import package
-        load and register
-        create connection
-        create statement
-        execute statement
-        process the results
-        close
-         */
-
-
-        String url = "jdbc:postgresql://localhost:5432/demo";
-        String user = "postgres";
-        String password = "PostG23";
+        Student s1 = new Student();
+        s1.setsName("khichar");
+        s1.setsAge(18);
+        s1.setRollNo(7);
 
 
 
-        try{
-            // 1. connect to database
-            Connection conn = DriverManager.getConnection(url, user, password);
-            System.out.println("Connected to PostgresSQL database!");
+        SessionFactory sf = new Configuration()
+                .addAnnotatedClass(org.example.Student.class)
+                .configure()
+                .buildSessionFactory();
 
-            // 2. Create a statement
-            String sql = "SELECT * FROM student WHERE sid = ? ";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1,1);
+        Session session = sf.openSession();
 
-            ResultSet rs = ps.executeQuery();
+        Transaction transaction = session.beginTransaction();
+        session.persist(s1);
 
-            while(rs.next()){
-                int id = rs.getInt("sid");
-                String name = rs.getString("sname");
-                int age = rs.getInt("age");
+        transaction.commit();
+        session.close();
+        sf.close();
 
-                System.out.println(id + " | " + name + "  | " +  age);
-            }
-
-            // 5. close Connection
-            rs.close();
-            ps.close();
-            conn.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+        System.out.println(s1);
     }
 }
