@@ -27,7 +27,7 @@ public class Student {
         this.rollNo = rollNo;
     }
 
-    public void setsAge(int sAge) {
+    public void setAge(int age) {
         this.age = age;
     }
 
