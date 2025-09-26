@@ -7,10 +7,10 @@
     <!-- bean definitions here -->
 
     <bean id="alien" class="org.example.Alien">
-        <property name="age" value="21"></property> <!-- injection of age value of alien class -->
-        <property name="lap" ref="lap1"></property>
+        <constructor-arg value="21" />
+        <property name="lap" ref="lap1"/>
     </bean>
 
-    <bean id="lap1" class="org.example.Laptop"></bean>
+    <bean id="lap1" class="org.example.Laptop"/>
 
 </beans>
