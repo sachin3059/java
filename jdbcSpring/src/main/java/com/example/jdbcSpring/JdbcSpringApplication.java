@@ -1,13 +1,13 @@
-package com.example.SpringJDBC;
+package com.example.jdbcSpring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringJdbcApplication {
+public class JdbcSpringApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringJdbcApplication.class, args);
+		SpringApplication.run(JdbcSpringApplication.class, args);
 	}
 
 }
