@@ -1,45 +1,47 @@
 package org.example.executerframework;
 
-
 import java.util.concurrent.*;
 
 public class Main {
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
 
         int numberOfServices = 3;
-        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        ExecutorService executorService = Executors.newFixedThreadPool(numberOfServices);
 
-        CountDownLatch latch = new CountDownLatch(numberOfServices);
-        // CountDownLatch is used when one or more threads need to wait until a set of operations in other threads completes.
+        // CyclicBarrier with a barrier action (optional)
+        CyclicBarrier barrier = new CyclicBarrier(numberOfServices, () -> {
+            System.out.println("All services reached barrier. Main can proceed.");
+        });
 
+        // Submit tasks
+        executorService.submit(new DependentService(barrier));
+        executorService.submit(new DependentService(barrier));
+        executorService.submit(new DependentService(barrier));
 
-        executorService.submit(new DependentService(latch));
-        executorService.submit(new DependentService(latch));
-        executorService.submit(new DependentService(latch));
-        latch.await();
-
-        System.out.println("Main");
+        // Shutdown after tasks complete
         executorService.shutdown();
-
-
-
-
     }
 }
 
+class DependentService implements Runnable {  // Runnable works better with CyclicBarrier
+    private final CyclicBarrier barrier;
 
-class  DependentService implements Callable<String> {
-    private final CountDownLatch latch;
-
-    public DependentService(CountDownLatch latch){
-        this.latch = latch;
+    public DependentService(CyclicBarrier barrier) {
+        this.barrier = barrier;
     }
 
     @Override
-    public String call() throws  Exception {
-        System.out.println(Thread.currentThread().getName() + "Service started");
-        Thread.sleep(2000);
-        latch.countDown();
-        return  "ok";
+    public void run() {
+        try {
+            System.out.println(Thread.currentThread().getName() + " Service started");
+            Thread.sleep(2000);
+
+            System.out.println(Thread.currentThread().getName() + " waiting at barrier");
+            barrier.await();  // Wait for other threads
+
+            System.out.println(Thread.currentThread().getName() + " proceeding after barrier");
+        } catch (InterruptedException | BrokenBarrierException e) {
+            e.printStackTrace();
+        }
     }
 }
