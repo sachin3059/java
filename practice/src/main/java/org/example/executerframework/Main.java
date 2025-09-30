@@ -1,29 +1,28 @@
 package org.example.executerframework;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 public class Main {
     public static void main(String[] args) {
 
         long startTime = System.currentTimeMillis();
-        Thread[] threads = new Thread[9];
+        ExecutorService executor = Executors.newFixedThreadPool(2);
         for(int i = 1; i < 10; i++){
             int finalI = i;
-            threads[i-1] = new Thread(
-                    () -> {
-                        long result = factorial(finalI);
-                        System.out.println(result);
-                    }
-            );
-            threads[i-1].start();
+            executor.submit(() -> {
+                long result = factorial(finalI);
+                System.out.println(result);
+            });
         }
+        executor.shutdown();
 
-        for(Thread thread: threads){
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            executor.awaitTermination(6, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-
         System.out.println("Total time: " + (System.currentTimeMillis() - startTime));
     }
 
