@@ -1,10 +1,11 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+// tight coupling example
+
 public class Main {
     public static void main(String[] args) {
-        UserManager userManager = new UserManager();
+        UserManager userManager= new UserManager();
         System.out.println(userManager.getUserInfo());
     }
 }
