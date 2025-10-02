@@ -1,12 +1,17 @@
 package sachin.annotations;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component //  marks this class as spring bean  => no need for xml now
 public class Specification {
-    private String make = "audi";
-    private String model = "audi123";
+
+    @Value("bmw")
+    private String make;
+
+    @Value("bmw@123")
+    private String model;
 
     @Override
     public String toString() {
