@@ -6,8 +6,13 @@
 
     <!-- bean definitions here -->
 
-    <bean id="myBean" class="edu.example.MyBean">
-        <property name="message" value="hello first bean" />
+    <bean id="carSpecification" class="car.example.constructor.injection.Specification">
+        <property name="make" value="audi" />
+        <property name="model" value="audi123" />
+    </bean>
+
+    <bean id="myCar" class="car.example.constructor.injection.Car">
+        <constructor-arg ref="carSpecification" />
     </bean>
 
 </beans>

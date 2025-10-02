@@ -9,9 +9,5 @@ public class App {
 
         MyBean myBean = (MyBean) context.getBean("myBean");
         System.out.println(myBean);
-
-        myBean.setMessage("hello");;
-        myBean.showMessage();
-        System.out.println(myBean);
     }
 }
