@@ -6,13 +6,12 @@
 
     <!-- bean definitions here -->
 
-    <bean id="carSpecification" class="car.example.setter.injection.Specification">
+    <bean id="specification" class="car.example.setter.injection.Specification">
         <property name="make" value="audi" />
         <property name="model" value="audi123" />
     </bean>
 
-    <bean id="myNewCar" class="car.example.setter.injection.Car">
-        <property name="specification" ref="carSpecification" />
+    <bean id="myNewCar" class="car.example.setter.injection.Car" autowire="byName">
     </bean>
 
 </beans>
