@@ -1,22 +1,25 @@
 package com.sachin.FirstSpringboot;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HelloController {
 
 
     @GetMapping("/hello")
-    public String hello(){
-        return "Hello World!!";
+    public HelloResponse hello(){
+        return new HelloResponse("Hello World !");
     }
 
+    @GetMapping("/hello/{name}")
+    public HelloResponse helloParam(@PathVariable String name){
+        return new HelloResponse("Hello " + name);
+    }
+
+
     @PostMapping("/hello")
-    public String helloPost(@RequestBody String name){
-        return "Hello " + name + "!";
+    public HelloResponse helloPost(@RequestBody String name){
+        return new HelloResponse("Hello " + name + "!");
     }
 }
