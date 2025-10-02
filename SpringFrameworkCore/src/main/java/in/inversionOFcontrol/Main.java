@@ -1,18 +1,23 @@
 package in.inversionOFcontrol;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class Main {
     public static void main(String[] args) {
-        UserDataProvider webService = new WebServiceDatabaseProvider();
-        UserDataProvider appService = new AppServiceDatabaseProvider();
-        UserDataProvider flutterService = new FlutterServiceDatabaseProvider();
 
-        UserMangaer userMangaer = new UserMangaer(webService);
-        System.out.println(userMangaer.getInfo());
+        ApplicationContext context = new ClassPathXmlApplicationContext("application.dataprovider.xml");
+        UserDataProvider webService = (UserDataProvider) context.getBean("webServiceProvider");
+        UserDataProvider appService = (UserDataProvider) context.getBean("appServiceProvider");
+        UserDataProvider flutterService = (UserDataProvider) context.getBean("flutterServiceProvider");
 
-        UserMangaer userMangaer1 = new UserMangaer(appService);
-        System.out.println(userMangaer1.getInfo());
+        UserMangaer userManager1 = (UserMangaer) context.getBean("userManager1");
+        System.out.println(userManager1.getInfo());
 
-        UserMangaer userMangaer2 = new UserMangaer(flutterService);
-        System.out.println(userMangaer2.getInfo());
+        UserMangaer userManager2 = (UserMangaer) context.getBean("userManager2");
+        System.out.println(userManager2.getInfo());
+
+        UserMangaer userManager3 = (UserMangaer) context.getBean("userManager3");
+        System.out.println(userManager3.getInfo());
     }
 }

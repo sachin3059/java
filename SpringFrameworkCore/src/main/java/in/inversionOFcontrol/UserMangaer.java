@@ -3,7 +3,7 @@ package in.inversionOFcontrol;
 public class UserMangaer {
     private UserDataProvider userDataProvider;
 
-    UserMangaer(UserDataProvider userDataProvider){
+    public void setUserDataProvider(UserDataProvider userDataProvider) {
         this.userDataProvider = userDataProvider;
     }
 

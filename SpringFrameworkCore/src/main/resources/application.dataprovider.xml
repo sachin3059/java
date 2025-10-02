@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+
+    <bean id="webServiceProvider" class="in.inversionOFcontrol.WebServiceDatabaseProvider">
+    </bean>
+    <bean id="appServiceProvider" class="in.inversionOFcontrol.AppServiceDatabaseProvider">
+    </bean>
+    <bean id="flutterServiceProvider" class="in.inversionOFcontrol.FlutterServiceDatabaseProvider">
+    </bean>
+
+
+
+    <bean id="userManager1" class="in.inversionOFcontrol.UserMangaer">
+        <property name="userDataProvider" ref="webServiceProvider" />
+    </bean>
+    <bean id="userManager2" class="in.inversionOFcontrol.UserMangaer">
+        <property name="userDataProvider"  ref="appServiceProvider" />
+    </bean>
+    <bean id="userManager3" class="in.inversionOFcontrol.UserMangaer">
+        <property name="userDataProvider" ref="flutterServiceProvider" />
+    </bean>
+
+</beans>
