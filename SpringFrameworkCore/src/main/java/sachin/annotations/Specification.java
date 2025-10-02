@@ -4,7 +4,7 @@ package sachin.annotations;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component //  marks this class as spring bean  => no need for xml now
+@Component("specification1") //  marks this class as spring bean  => no need for xml now
 public class Specification {
 
     @Value("bmw")
