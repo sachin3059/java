@@ -12,6 +12,13 @@
 5. PUT  /jobs/{id}
 
 
+* COMPANIES
+1. GET /companies
+2. GET /companies/{id}
+3. PUT /companies/{id}
+4. POST /companies
+5. DELETE /companies/{id}
+
 
 * REVIEWS
 1. GET   /companies/{companyId}/reviews
