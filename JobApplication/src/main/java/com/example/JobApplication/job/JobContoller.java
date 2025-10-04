@@ -51,7 +51,7 @@ public class JobContoller {
     public ResponseEntity<String> updateJobById(@PathVariable Long id, @RequestBody Job updatedJob){
         boolean updated = jobService.updateJobById(id, updatedJob);
         if(updated){
-            return new ResponseEntity<>("job updated successfullu!", HttpStatus.OK);
+            return new ResponseEntity<>("job updated successful!", HttpStatus.OK);
         }
         else{
             return new ResponseEntity<>("something error", HttpStatus.NOT_FOUND);
