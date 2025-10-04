@@ -1,5 +1,6 @@
 package com.example.JobApplication.job;
 
+import com.example.JobApplication.company.Company;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
